@@ -13,24 +13,24 @@
       <input type="text" id="search-input" placeholder="Enter a city">
       <button type="submit">Search</button>
     </form>
-    <aside>
+    <div id="search-history-container">
+      <div id="history-container">
       <h2>Search History</h2>
-      <ul id="search-history"></ul>
-    </aside>
+      <div id="search-history"></div>
+      </div>
+    </div>
   </header>
-
   <main>
     <section id="current-weather">
-      <h2 id="city-name"></h2>
+      <h2>Today</h2>
+      <div id="city-name"></div>
       <div id="current-weather-details"></div>
     </section>
-
     <section id="forecast">
       <h2>5-Day Forecast</h2>
       <div id="forecast-container"></div>
     </section>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>

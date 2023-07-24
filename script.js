@@ -1,6 +1,7 @@
 const API_KEY = '6bfb621281c583496216186a1cf5df50';
 const searchForm = document.querySelector('#search-form');
 const searchInput = document.querySelector('#search-input');
+const searchHistoryContainer = document.querySelector('#search-history-container');
 const searchHistory = document.querySelector('#search-history');
 const currentWeather = document.querySelector('#current-weather');
 const forecast = document.querySelector('#forecast');
@@ -27,10 +28,12 @@ function getWeather(city) {
       const windSpeed = Math.round(currentWeatherData.wind.speed);
 
       currentWeather.innerHTML = `
+        <div class ="weather-item">
         <h2 id="city-name">${cityName} (${date}) <img src="${iconURL}" alt="${currentWeatherData.weather[0].description}" /></h2>
         <p>Temperature: ${temperature} &deg;C</p>
         <p>Humidity: ${humidity}%</p>
         <p>Wind Speed: ${windSpeed} km/h</p>
+        </div>
       `;
 
       // Update forecast
@@ -47,7 +50,7 @@ function getWeather(city) {
         if (item.dt_txt.includes('12:00:00')) {
           forecastHTML += `
             <div class="forecast-item">
-              <p>${date}</p>
+              <p><strong>${date}</strong></p>
               <img src="${iconURL}" alt="${item.weather[0].description}" />
               <p>Temp: ${temperature} &deg;C</p>
               <p>Humidity: ${humidity}%</p>
@@ -72,7 +75,7 @@ searchForm.addEventListener('submit', e => {
     getWeather(city);
     if (!searchHistoryArray.includes(city)) {
       searchHistoryArray.push(city);
-      const searchHistoryItem = document.createElement('li');
+      const searchHistoryItem = document.createElement('div');
       searchHistoryItem.textContent = city;
       searchHistory.appendChild(searchHistoryItem);
     }
