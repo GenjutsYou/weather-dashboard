@@ -25,7 +25,7 @@
     color: black;
     background-color: ghostwhite;
     margin: 20px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
   }
 
@@ -91,7 +91,6 @@
   .weather-item {
     border: 2px solid slategrey;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
   }
   
