@@ -8,12 +8,13 @@
     font-family: sans-serif;
     background-color: ghostwhite;
     color: black;
-    background-color:deepskyblue;
+    background: linear-gradient(to right, deepskyblue, lightblue);
+
     
   }
   
   header {
-    background-color: deepskyblue;
+    /* background-color: deepskyblue; */
     color: ghostwhite;
     padding: 20px;
     display: flex;
@@ -33,11 +34,6 @@
     border: 2px solid slategrey;
     padding: 10px;
     border-radius: 5px;
-  }
-
-  main {
-    background-color: deepskyblue;
-
   }
   
   h1 {
@@ -81,18 +77,18 @@
   }
   
   #current-weather {
-    background-color:ghostwhite;
-    padding: 20px;
+    background: linear-gradient(to bottom, deepskyblue, lightblue);
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-  }
+}
 
-  .weather-item {
-    border: 2px solid slategrey;
-    padding: 10px;
-    border-radius: 5px;
-  }
+.weather-item {
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px solid slategrey;
+  padding: 10px;
+  border-radius: 5px;
+}
   
   #city-name {
     font-size: 32px;
@@ -106,13 +102,14 @@
   }
   
   #forecast {
-    background-color: ghostwhite;
+    background: radial-gradient(circle, deepskyblue, lightblue);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba
   }
 
   .forecast-item {
+    background: rgba(255, 255, 255, 0.6);
     border: 1px solid slategrey;
     padding: 10px;
     margin-bottom: 10px;
