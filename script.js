@@ -5,8 +5,11 @@ const searchHistoryContainer = document.querySelector('#search-history-container
 const searchHistory = document.querySelector('#search-history');
 const currentWeather = document.querySelector('#current-weather');
 const forecast = document.querySelector('#forecast');
+const mainSection = document.querySelector('main');
 
 let searchHistoryArray = [];
+
+mainSection.style.display = 'none';
 
 function getWeather(city) {
   const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
@@ -23,16 +26,19 @@ function getWeather(city) {
       const date = new Date(currentWeatherData.dt * 1000).toLocaleDateString();
       const iconCode = currentWeatherData.weather[0].icon;
       const iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-      const temperature = Math.round(currentWeatherData.main.temp);
+      const temperatureCelsius = Math.round(currentWeatherData.main.temp);
+      const temperatureFahrenheit = Math.round((temperatureCelsius * 9/5) + 32);
       const humidity = currentWeatherData.main.humidity;
       const windSpeed = Math.round(currentWeatherData.wind.speed);
 
       currentWeather.innerHTML = `
-        <div class ="weather-item">
-        <h2 id="city-name">${cityName} (${date}) <img src="${iconURL}" alt="${currentWeatherData.weather[0].description}" /></h2>
-        <p>Temperature: ${temperature} &deg;C</p>
+        <div class="weather-item">
+        <div id="city-name">${cityName} (${date}) <img src="${iconURL}" alt="${currentWeatherData.weather[0].description}" /></div>
+        <div class="weather-reading">
+        <p>Temperature: ${temperatureCelsius} &deg;C / ${temperatureFahrenheit} &deg;F</p>
         <p>Humidity: ${humidity}%</p>
         <p>Wind Speed: ${windSpeed} km/h</p>
+        </div>
         </div>
       `;
 
@@ -43,18 +49,23 @@ function getWeather(city) {
         const date = new Date(item.dt * 1000).toLocaleDateString();
         const iconCode = item.weather[0].icon;
         const iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
-        const temperature = Math.round(item.main.temp);
+        const temperatureCelsius = Math.round(item.main.temp);
+        const temperatureFahrenheit = Math.round((temperatureCelsius * 9/5) + 32);
         const humidity = item.main.humidity;
         const windSpeed = Math.round(item.wind.speed);
 
         if (item.dt_txt.includes('12:00:00')) {
           forecastHTML += `
             <div class="forecast-item">
+            <div class="forecast-date">
               <p><strong>${date}</strong></p>
               <img src="${iconURL}" alt="${item.weather[0].description}" />
-              <p>Temp: ${temperature} &deg;C</p>
+            </div>
+            <div class="forecast-reading">
+              <p>Temp: ${temperatureCelsius} &deg;C / ${temperatureFahrenheit} &deg;F</p>
               <p>Humidity: ${humidity}%</p>
               <p>Wind: ${windSpeed} km/h</p>
+            </div>
             </div>
           `;
         }
@@ -80,6 +91,7 @@ searchForm.addEventListener('submit', e => {
       searchHistory.appendChild(searchHistoryItem);
     }
     searchInput.value = '';
+    mainSection.style.display = 'block';
   }
 });
 
@@ -87,4 +99,3 @@ searchHistory.addEventListener('click', e => {
   const city = e.target.textContent;
   getWeather(city);
 });
-
